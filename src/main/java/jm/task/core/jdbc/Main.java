@@ -10,7 +10,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args)  {
         // реализуйте алгоритм здесь
-        UserServiceImpl userService = new UserServiceImpl();
+        UserService userService = new UserServiceImpl();
         userService.createUsersTable();
         userService.saveUser("Kim","Chen yn", (byte) 39);
         System.out.println("User с именем - Kim добавлен в базу данных");

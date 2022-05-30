@@ -13,6 +13,7 @@ public class Util {
         String userPassword = "1408";
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(conURL,userName,userPassword);
-        return connection;
+            return connection;
+        }
     }
-}
+

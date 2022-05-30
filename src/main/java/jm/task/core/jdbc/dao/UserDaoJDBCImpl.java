@@ -13,9 +13,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void createUsersTable() {
-        Connection conn = null;
-        try {
-            conn = Util.getMYSQLConnection();
+        try (Connection conn = Util.getMYSQLConnection()) {
             if (conn != null) {
                 conn.setAutoCommit(false);
                 Statement statement = conn.createStatement();
@@ -24,21 +22,12 @@ public class UserDaoJDBCImpl implements UserDao {
                 conn.commit();
             }
         } catch (SQLException | ClassNotFoundException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {}
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {}
         }
 
     }
 
     public void dropUsersTable() {
-        Connection conn = null;
-        try {
-            conn = Util.getMYSQLConnection();
+        try (Connection conn = Util.getMYSQLConnection()){
             if (conn != null) {
                 conn.setAutoCommit(false);
                 Statement statement = conn.createStatement();
@@ -46,20 +35,11 @@ public class UserDaoJDBCImpl implements UserDao {
                 conn.commit();
             }
         } catch (SQLException | ClassNotFoundException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {}
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {}
         }
     }
 
         public void saveUser(String name, String lastName, byte age) {
-        Connection conn = null;
-        try {
-            conn = Util.getMYSQLConnection();
+        try (Connection conn = Util.getMYSQLConnection()) {
             if (conn != null) {
                 conn.setAutoCommit(false);
                 PreparedStatement pr = conn.prepareStatement("INSERT INTO Users (name, lastName, age) values(?,?,?)");
@@ -70,25 +50,12 @@ public class UserDaoJDBCImpl implements UserDao {
                 conn.commit();
             }
             } catch (SQLException | ClassNotFoundException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                e.printStackTrace();
-            }
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         }
 
 
     public void removeUserById(long id) {
-        Connection conn = null;
-        try {
-            conn = Util.getMYSQLConnection();
+        try (Connection conn = Util.getMYSQLConnection()) {
             if (conn != null) {
                 conn.setAutoCommit(false);
                 PreparedStatement ps = conn.prepareStatement("DELETE FROM Users WHERE id = ?");
@@ -97,27 +64,12 @@ public class UserDaoJDBCImpl implements UserDao {
                 conn.commit();
             }
             } catch (SQLException | ClassNotFoundException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                e.printStackTrace();
-            }
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-
-
     }
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        Connection conn = null;
-        try {
-            conn = Util.getMYSQLConnection();
+        try (Connection conn = Util.getMYSQLConnection()) {
             if (conn != null) {
                 conn.setAutoCommit(false);
                 PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users");
@@ -128,25 +80,12 @@ public class UserDaoJDBCImpl implements UserDao {
                 conn.commit();
             }
         } catch (SQLException | ClassNotFoundException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                e.printStackTrace();
-            }
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return users;
     }
 
     public void cleanUsersTable() {
-        Connection conn = null;
-        try {
-            conn = Util.getMYSQLConnection();
+        try (Connection conn = Util.getMYSQLConnection()) {
             if (conn != null) {
                 conn.setAutoCommit(false);
                 PreparedStatement ps = conn.prepareStatement("DELETE FROM Users");
@@ -154,16 +93,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 conn.commit();
             }
         } catch (SQLException | ClassNotFoundException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-            }
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-            }
-
         }
     }
 }

@@ -4,9 +4,8 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
-import org.hibernate.query.Query;
 
+import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,9 +64,8 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             User user = new User();
-            session.createQuery("DELETE User WHERE id = :id")
-                    .setParameter("id",user.getId())
-                    .executeUpdate();
+            user.setId(user.getId());
+            session.delete(user);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();

@@ -20,7 +20,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createSQLQuery("create table if not exists Users (id BIGINT NOT NULL AUTO_INCREMENT " +
+            Query query = session.createSQLQuery("create table if not exists users47 (id BIGINT NOT NULL AUTO_INCREMENT " +
                     "PRIMARY KEY, name varchar(255) not null, lastname varchar(255) not null, age TINYINT not null)").addEntity(User.class);
             query.executeUpdate();
             transaction.commit();
@@ -34,7 +34,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createSQLQuery("DROP table if EXISTS Users").addEntity(User.class);
+            Query query = session.createSQLQuery("DROP table if EXISTS users47").addEntity(User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class UserDaoHibernateImpl implements UserDao {
         List<User> users = new ArrayList<>();
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("SELECT users FROM User users", User.class);
+            Query query = session.createQuery("SELECT users47 FROM User users47", User.class);
             users = query.getResultList();
             transaction.commit();
 

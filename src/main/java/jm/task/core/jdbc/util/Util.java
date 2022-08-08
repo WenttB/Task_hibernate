@@ -44,6 +44,9 @@ public class Util {
         }
         return sessionFactory;
     }
+    public static void closeSession () {
+        sessionFactory.close();
+    }
         // реализуйте настройку соеденения с БД
 
     public static Connection getMYSQLConnection() throws SQLException, ClassNotFoundException {
